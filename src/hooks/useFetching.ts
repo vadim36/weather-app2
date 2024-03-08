@@ -9,7 +9,8 @@ export function useFetching(callback: Function):useFetchingReturn {
       setIsLoading(true)
       await callback()
     } catch (error: unknown) {
-      setError((error as Error).message)
+      const errorMessage: string = (error as Error).message ?? 'Unexpected Error' 
+      setError(errorMessage)
       setIsLoading(false)
     } finally {
       setIsLoading(false)

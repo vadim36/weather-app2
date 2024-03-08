@@ -1,6 +1,7 @@
 import {FC, useEffect, useState} from 'react'
 import WeatherService from './API/WeatherService'
 import { useFetching } from './hooks/useFetching'
+import { WeatherData } from './components/WeatherData'
 
 export const App: FC = () => {
   const [weather, setWeather] = useState<WeatherResponse>()
@@ -23,8 +24,7 @@ export const App: FC = () => {
     <>
       {weatherLoading && <h1>Loading...</h1>}
       {weatherLoadingError && <h1>Error {weatherLoadingError}</h1>}
-      {!weatherLoading && !weatherLoadingError
-        && String(weather?.cod)}
+      {weather && <WeatherData weatherData={weather}/>}
     </>
   )
 }

@@ -41,7 +41,7 @@ interface Weather {
     main: string,
     description: string,
     icon: string
-  }
+  }[],
   clouds: { all: number },
   wind: {
     speed: number,
