@@ -22,9 +22,11 @@ export const App: FC = () => {
   
   return (
     <>
-      {weatherLoading && <h1>Loading...</h1>}
-      {weatherLoadingError && <h1>Error {weatherLoadingError}</h1>}
-      {weather && <WeatherData weatherData={weather}/>}
+      <main>
+        {weatherLoading && <h1>Loading...</h1>}
+        {weatherLoadingError && <h1>Error {weatherLoadingError}</h1>}
+        {weather && <WeatherData weatherData={weather}/>}
+      </main>
     </>
   )
 }
