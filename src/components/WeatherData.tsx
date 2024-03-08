@@ -1,5 +1,6 @@
-import {FC, useState} from 'react'
+import {FC, useState, useRef} from 'react'
 import { Button } from '../UI/Button'
+import { Modal } from '../UI/Modal'
 
 interface WeatherDataProps {
   weatherData: WeatherResponse
@@ -17,6 +18,25 @@ export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
     temp: Math.ceil(weatherList[0].main.temp / 33.8),
     icon: weatherList[0].weather[0].icon
   })
+  const [extraWeather, setExtraWeather] = useState({
+    feels_like: weatherList[0].main.feels_like,
+    temp_min: weatherList[0].main.temp_min,
+    temp_max: weatherList[0].main.temp_max,
+    pressure: weatherList[0].main.pressure,
+    sea_level: weatherList[0].main.sea_level,
+    humidity: weatherList[0].main.humidity,
+  })
+  const [isShowModal, setIsShowModal] = useState<boolean>(false)
+  const $modal = useRef<HTMLDialogElement | null>(null)
+
+  function toggleModal():void {
+    if (isShowModal) {
+      $modal.current!.close()
+      return setIsShowModal(false)
+    }
+    $modal.current!.showModal()
+    return setIsShowModal(true)
+  }
 
   return (
     <section aria-label="main weather content" className='flex flex-col h-dvh'>
@@ -32,8 +52,11 @@ export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
           alt="weather icon" className='size-56'/>
         <h2 className='font-semibold text-7xl p-2'>{weather.temp} ºC</h2>
         <h1 className='font-bold text-3xl m-2'>{weather.title}</h1>
-        <Button className='m-3'>Show more info</Button>
+        <Button className='m-3' onClick={toggleModal}>Show more info</Button>
       </section>
+      <Modal ref={$modal} toggleModal={toggleModal}>
+123
+      </Modal>
     </section>
   )
 }
