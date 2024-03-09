@@ -1,4 +1,4 @@
-import {FC, useState, useRef} from 'react'
+import {FC, useState, useRef, ReactNode} from 'react'
 import { Button } from '../UI/Button'
 import { Modal } from '../UI/Modal'
 
@@ -55,7 +55,17 @@ export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
         <Button className='m-3' onClick={toggleModal}>Show more info</Button>
       </section>
       <Modal ref={$modal} toggleModal={toggleModal}>
-123
+        <dl>
+          {Object.keys(extraWeather).map((key: string):ReactNode => {
+            return (
+              <>
+                <dt>{key}</dt>
+                {/*/@ts-ignore*/}
+                <dd>{extraWeather[key]}</dd>
+              </>
+            )
+          })}
+        </dl>
       </Modal>
     </section>
   )
