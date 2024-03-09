@@ -1,4 +1,4 @@
-import {FC, useState, useRef, ReactNode} from 'react'
+import React, {FC, useState, useRef, ReactNode, useEffect} from 'react'
 import { Button } from '../UI/Button'
 import { Modal } from '../UI/Modal'
 
@@ -7,7 +7,7 @@ interface WeatherDataProps {
 }
 
 export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
-  const weatherList: Weather[] = [...weatherData.list]
+  const [weatherList, setWeatherList] = useState<Weather[]>([...weatherData.list])
   const date: Date = new Date(weatherList[0].dt_txt)
   const [weather, setWeather] = useState({
     date: date.toLocaleString('ru-RU', {
@@ -38,6 +38,21 @@ export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
     return setIsShowModal(true)
   }
 
+  useEffect(() => {
+    setWeatherList([...weatherData.list])
+    setWeather(
+      {
+        date: date.toLocaleString('ru-RU', {
+          month: 'long',
+          day: 'numeric'
+        }),
+        title: weatherList[0].weather[0].main,
+        temp: Math.ceil(weatherList[0].main.temp / 33.8),
+        icon: weatherList[0].weather[0].icon
+      }
+    )
+  }, [weatherData])
+
   return (
     <section aria-label="main weather content" className='flex flex-col h-dvh'>
       <section aria-label='weather header content' className='text-2xl 
@@ -58,11 +73,11 @@ export const WeatherData:FC<WeatherDataProps> = ({weatherData}) => {
         <dl>
           {Object.keys(extraWeather).map((key: string):ReactNode => {
             return (
-              <>
+              <React.Fragment key={key}>
                 <dt>{key}</dt>
                 {/*/@ts-ignore*/}
                 <dd>{extraWeather[key]}</dd>
-              </>
+              </React.Fragment>
             )
           })}
         </dl>
