@@ -1,9 +1,17 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
+import { Header } from './components/Header'
+import { LocationContext } from './context'
 
 export const App: FC = () => {
+  const [location, setLocation] = useState<string>('')
+  
   return (
     <>
-      WORK!
+      <LocationContext.Provider value={{
+        location, setLocation
+      }}>
+        <Header/>
+      </LocationContext.Provider>
     </>
   )
 }
