@@ -9,4 +9,13 @@ export default abstract class WeatherService {
       .then((response: Response):Promise<WeatherResponse> => response.json())
       .then((response: WeatherResponse):Weather[] => response.list!)
   }
+
+  public static async getLocation(town: string):Promise<TownResponse> {
+    const request: string = 
+      `http://api.openweathermap.org/geo/1.0/direct?q=${town}&appid=${KEY}`
+
+    return fetch(request)
+      .then((response: Response):Promise<TownResponse[]> => response.json())
+      .then((response: TownResponse[]):TownResponse => response[0])
+  }
 }

@@ -51,3 +51,9 @@ interface TLocationContext {
   location: string,
   setLocation: Dispatch<SetStateAction<HTMLElement>>
 }
+
+type TUseFetching = [
+  fetching: Function,
+  isLoading: boolean,
+  error: string
+]
