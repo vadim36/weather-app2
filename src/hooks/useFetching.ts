@@ -6,6 +6,7 @@ export default function useFetching(callback: Function):TUseFetching {
 
   async function fetching():Promise<void> {
     try {
+      setError('')
       setIsLoading(true)
       await callback()
     } catch (error: unknown) {

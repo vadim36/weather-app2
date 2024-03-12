@@ -9,6 +9,7 @@ export const LocationForm:FC = () => {
 
   function submitHandler(event: FormEvent<HTMLFormElement>):void {
     event.preventDefault()
+    setInputValue('')
     return setLocation(inputValue)
   }
 
