@@ -4,17 +4,26 @@ import useFetching from '../hooks/useFetching'
 import WeatherService from '../API/WeatherService'
 import { Loader } from './UI/Loader'
 import { Error } from './UI/Error'
+import { MainWeatherPanel } from './MainWeatherPanel'
 
 export const WeatherContent:FC = () => {
   const {location} = useContext(LocationContext)
-  const [weather, setWeather] = useState({
-    temp: 0
+  const [mainWeather, setMainWeather] = useState<IMainWeather>({
+    temp: 0,
+    title: '',
+    icon: '1d'
   })
   const [fetchData, loadingData, loadingErrorData] = 
-    useFetching(async ():Promise<void> => {
+    useFetching(async ():Promise<void> => {      
       const {lat, lon}: TownResponse = await WeatherService.getLocation(location)
+      console.log(lat);
+      
       const weatherData: Weather[] = await WeatherService.getWeather(lat, lon)
-      return setWeather({...weather, temp: weatherData[0].main.temp})
+      return setMainWeather({
+        temp: weatherData[0].main.temp,
+        title: weatherData[0].weather[0].main,
+        icon: weatherData[0].weather[0].icon
+      })
     })
 
   useEffect(() => {
@@ -22,11 +31,14 @@ export const WeatherContent:FC = () => {
   }, [location])
 
   return (
-    <section aria-label='Weather section'>
+    <section aria-label='Weather section' className='flex flex-col'>
       {loadingData && <Loader/>}
       {loadingErrorData && <Error message={loadingErrorData}/>}
       {fetchData && !loadingErrorData && !loadingData 
-        && `Content ${weather.temp}`}
+        && <>
+          <MainWeatherPanel weatherData={mainWeather}/>
+        </>
+      }
     </section>
   )
 }

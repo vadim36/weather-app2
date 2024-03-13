@@ -1,4 +1,4 @@
-const KEY: string = '40dd0d9fca4d02c5fa33d8b285cdeb4f'
+const KEY: string = '719b91aa96138c35669cf96e2cb62823'
 
 export default abstract class WeatherService {
   public static async getWeather(lat: number, lon: number):Promise<Weather[]> {

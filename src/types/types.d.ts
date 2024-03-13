@@ -59,3 +59,9 @@ type TUseFetching = [
   isLoading: boolean,
   error: string
 ]
+
+interface IMainWeather {
+  title: string,
+  temp: number,
+  icon: string
+}
