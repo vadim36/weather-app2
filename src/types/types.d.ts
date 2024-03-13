@@ -53,3 +53,9 @@ interface ILocationContext {
   isLocation: boolean,
   setIsLocation: Dispatch<SetStateAction<boolean>>
 }
+
+type TUseFetching = [
+  fetching: Function,
+  isLoading: boolean,
+  error: string
+]
