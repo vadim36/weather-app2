@@ -6,7 +6,6 @@ interface Weather {
     temp_min: number,
     temp_max: number,
     pressure: number,
-    sea_level: number,
     grnd_level: number,
     humidity: number,
     temp_kf: number
@@ -62,4 +61,37 @@ interface IMainWeather {
   title: string,
   temp: number,
   icon: string
+}
+
+interface IExtraWeatherValue {
+  title: string,
+  value: number
+}
+
+interface IExtraWeather {
+  temp: IExtraWeatherValue,
+  feels_like: IExtraWeatherValue,
+  temp_min: IExtraWeatherValue,
+  temp_max: IExtraWeatherValue,
+  pressure: IExtraWeatherValue,
+  humidity: IExtraWeatherValue
+}
+
+interface CurrentWeather extends Weather {
+  coords: {
+    lon: number,
+    lat: number
+  },
+  base: string,
+  sys: {
+    type: number,
+    id: number,
+    country: string,
+    sunrise: string,
+    sunset: string
+  },
+  timezone: number,
+  id: number,
+  name: string,
+  cod: number
 }

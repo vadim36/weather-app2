@@ -4,11 +4,12 @@ import { Alert } from './UI/Alert'
 import { LocationContext } from '../context'
 
 interface MainWeatherPanelProps {
-  weatherData: IMainWeather
+  weatherData: IMainWeather,
+  toggleModal: () => void
 }
 
-export const MainWeatherPanel:FC<MainWeatherPanelProps> = ({weatherData}) => {
-  const {title, temp, icon}: IMainWeather = weatherData
+export const MainWeatherPanel:FC<MainWeatherPanelProps> = (props) => {
+  const {title, temp, icon}: IMainWeather = props.weatherData
   const {location} = useContext(LocationContext)
 
   return (
@@ -20,7 +21,7 @@ export const MainWeatherPanel:FC<MainWeatherPanelProps> = ({weatherData}) => {
       <img src={`https://openweathermap.org/img/wn/${icon}@4x.png`} alt="weather icon"/>
       <h1 className='font-bold text-3xl'>{temp}°C</h1>
       <h2 className='font-semibold text-xl'>{title}</h2>
-      <Button>Extra information</Button>
+      <Button onClick={props.toggleModal}>Extra information</Button>
     </section>
   )
 }
