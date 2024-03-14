@@ -49,9 +49,7 @@ interface WeatherResponse {
 
 interface ILocationContext {
   location: string,
-  setLocation: Dispatch<SetStateAction<string>>,
-  isLocation: boolean,
-  setIsLocation: Dispatch<SetStateAction<boolean>>
+  setLocation: Dispatch<SetStateAction<string>>
 }
 
 type TUseFetching = [

@@ -5,13 +5,12 @@ import { LocationContext } from '../context'
 
 export const LocationForm:FC = () => {
   const [inputLocation, setInputLocation] = useState<string>('') 
-  const {setLocation, setIsLocation} = useContext(LocationContext)
+  const {setLocation} = useContext(LocationContext)
 
   function submitHandler(event: FormEvent<HTMLFormElement>):void {
     event.preventDefault()
     setLocation(inputLocation)
-    setInputLocation('')
-    return setIsLocation(true)
+    return setInputLocation('')
   }
 
   return (
@@ -24,6 +23,7 @@ export const LocationForm:FC = () => {
         onChange={(event: ChangeEvent<HTMLInputElement>):void => {
           return setInputLocation(event.target.value)
         }}
+        placeholder='Weather in...'
       />
       <Button className='size-12'>
         <img src="../../public/search.svg" alt="search icon"/>

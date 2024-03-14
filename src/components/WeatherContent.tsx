@@ -11,13 +11,11 @@ export const WeatherContent:FC = () => {
   const [mainWeather, setMainWeather] = useState<IMainWeather>({
     temp: 0,
     title: '',
-    icon: '1d'
+    icon: '01d'
   })
   const [fetchData, loadingData, loadingErrorData] = 
     useFetching(async ():Promise<void> => {      
       const {lat, lon}: TownResponse = await WeatherService.getLocation(location)
-      console.log(lat);
-      
       const weatherData: Weather[] = await WeatherService.getWeather(lat, lon)
       return setMainWeather({
         temp: weatherData[0].main.temp,
@@ -31,7 +29,7 @@ export const WeatherContent:FC = () => {
   }, [location])
 
   return (
-    <section aria-label='Weather section' className='flex flex-col'>
+    <section aria-label='Weather section' className='flex flex-col flex-1'>
       {loadingData && <Loader/>}
       {loadingErrorData && <Error message={loadingErrorData}/>}
       {fetchData && !loadingErrorData && !loadingData 
