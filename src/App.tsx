@@ -6,8 +6,6 @@ import { WeatherContent } from './components/WeatherContent'
 export const App: FC = () => {
   const [location, setLocation] = useState('London')
 
-  //TODO:Отдельный запрос для вызова погоды на один день
-
   return (
     <div id='App' className='h-dvh flex flex-col'>
       <LocationContext.Provider value={{

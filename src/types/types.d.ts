@@ -87,11 +87,16 @@ interface CurrentWeather extends Weather {
     type: number,
     id: number,
     country: string,
-    sunrise: string,
-    sunset: string
+    sunrise: number,
+    sunset: number
   },
   timezone: number,
   id: number,
   name: string,
   cod: number
+}
+
+interface IDayInfo {
+  sunrise: string,
+  sunset: string
 }
