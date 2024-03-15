@@ -13,6 +13,8 @@ export const LocationForm:FC = () => {
     return setInputLocation('')
   }
 
+  //TODO: валидация формы
+
   return (
     <form 
       className='flex gap-2'
@@ -24,8 +26,9 @@ export const LocationForm:FC = () => {
           return setInputLocation(event.target.value)
         }}
         placeholder='Weather in...'
+        className='w-2/3'
       />
-      <Button className='size-12'>
+      <Button className='size-14'>
         <img src="../../public/search.svg" alt="search icon"/>
       </Button>
     </form>

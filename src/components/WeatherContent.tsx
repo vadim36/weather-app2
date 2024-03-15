@@ -3,7 +3,7 @@ import { LocationContext } from '../context'
 import useFetching from '../hooks/useFetching'
 import WeatherService from '../API/WeatherService'
 import { Loader } from './UI/Loader'
-import { Error } from './UI/Error'
+import { Alert } from './UI/Alert'
 import { MainWeatherPanel } from './MainWeatherPanel'
 import { ExtraWeather } from './ExtraWeather'
 import { DayInfo } from './DayInfo'
@@ -79,7 +79,9 @@ export const WeatherContent:FC = () => {
   return (
     <section aria-label='Weather section' className='flex flex-col flex-1'>
       {loadingData && <Loader/>}
-      {loadingErrorData && <Error message={loadingErrorData}/>}
+      {loadingErrorData && <div className='p-2'>
+        <Alert body={loadingErrorData} variant='danger'/>
+      </div>}
       {fetchData && !loadingErrorData && !loadingData 
         && <>
           <MainWeatherPanel weatherData={mainWeather} toggleModal={toggleModal}/>

@@ -10,10 +10,10 @@ interface InputProps {
 
 export const Input:FC<InputProps> = (props) => {  
   return (
-    <input 
+    <input
+      {...props}
       type={props.type ?? 'text'} 
       className={`outline outline-1 rounded px-2 text-2xl ${props.className}`}
-      {...props}
     />
   )
 }
