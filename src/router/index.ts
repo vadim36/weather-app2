@@ -4,5 +4,5 @@ import { Paths } from "../utils/enums"
 
 export const routes: Route[] = [
   { title: 'Dashboard', path: Paths.dashboard, element: Dashboard },
-  { title: 'Settings', path: Paths.settings, element: Settings}
+  { title: 'Settings', path: Paths.settings, element: Settings }
 ]
