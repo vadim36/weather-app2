@@ -1,25 +1,52 @@
 import {FC, ReactNode} from 'react'
 import { ColorVariants } from '../../utils/enums'
+import * as stylex from '@stylexjs/stylex'
 
 interface ButtonProps {
   children: ReactNode,
-  className?:string,
-  onClick?: () => void,
   variant?: ColorVariants,
-  noTextColor?: boolean
+  onClick?: () => void,
+  active?: boolean,
+  styles?: stylex.StyleXStyles,
 }
 
-export const Button:FC<ButtonProps> = (props) => {
+const BUTTON_STYLES = stylex.create({
+  base: {
+    fontSize: '1.35rem',
+    lineHeight: '1.75rem',
+    borderRadius: '.5rem',
+    padding: '.5rem'
+  },
+  active: {
+    position: 'relative',
+    transition: '.1s linear',
+    ':active': { top: '.25rem' },
+    ':hover': { backgroundColor: '#000', color: '#FFF' }
+  },
+  primary: {
+    backgroundColor: 'rgb(3 105 161)',
+    color: '#FFF'
+  },
+  outlined: {
+    border: '2px solid #000',
+  }
+})
+
+export const Button:FC<ButtonProps> = ({
+  children, 
+  variant = ColorVariants.primary,
+  active = true,
+  styles,
+  ...props
+}) => {
   return (
-    <button 
-      {...props}
-      className={`${props.className ?? ''} bg-sky-700 text-2xl rounded-lg p-2 relative active:top-1 ${props.noTextColor ? '' : 'text-white'} 
-      data-[variant="outlined"]:bg-transparent data-[variant="outlined"]:border-2 
-      data-[variant="outlined"]:border-black ${props.noTextColor ? '' : 
-      'data-[variant="outlined"]:text-black}'}`}
-      data-variant={props.variant}
-    >
-      {props.children}
+    <button {...stylex.props(
+      BUTTON_STYLES.base,
+      active && BUTTON_STYLES.active,
+      BUTTON_STYLES[variant],
+      styles
+    )} {...props}>
+      {children}
     </button>
   )
 }

@@ -1,6 +1,7 @@
 import {FC, ReactNode, createElement} from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { routes } from '../router'
+import { Dashboard } from '../pages/Dashboard'
 
 export const AppRouter:FC = () => {
   return (
@@ -14,6 +15,7 @@ export const AppRouter:FC = () => {
           /> 
         )
       })}
+      <Route path="*" element={<Dashboard/>}/>
     </Routes>
   )
 }

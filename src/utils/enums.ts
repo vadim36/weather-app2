@@ -1,4 +1,5 @@
 export enum ColorVariants {
+  primary = 'primary',
   outlined = 'outlined'
 }
 
